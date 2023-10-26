@@ -3,8 +3,8 @@ class Post < ApplicationRecord
   has_many :comments
   has_many :likes
 
-  attribute :title, type: String
-  attribute :text, type: Text
-  attribute :likes_count, type: Integer, default: 0
-  attribute :comments_count, type: Integer, default: 0
+  attribute :title, :string
+  attribute :text, :text
+  attribute :likes_count, :integer, default: 0
+  attribute :comments_count, :integer, default: 0
 end
