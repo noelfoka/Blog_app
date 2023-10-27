@@ -44,12 +44,12 @@ RSpec.describe Post, type: :model do
       user = User.create(name: 'Sintheys')
       post = Post.create(title: 'Good morning', author: user)
 
-      comment1 = Comment.create(user: user, post: post, text: 'comment 1', created_at: 5.days.ago)
-      comment2 = Comment.create(user: user, post: post, text: 'comment 2', created_at: 4.days.ago)
-      comment3 = Comment.create(user: user, post: post, text: 'comment 3', created_at: 3.days.ago)
-      comment4 = Comment.create(user: user, post: post, text: 'comment 4', created_at: 2.days.ago)
-      comment5 = Comment.create(user: user, post: post, text: 'comment 5', created_at: 1.day.ago)
-      comment6 = Comment.create(user: user, post: post, text: 'comment 6', created_at: Time.now)
+      Comment.create(user:, post:, text: 'comment 1', created_at: 5.days.ago)
+      comment2 = Comment.create(user:, post:, text: 'comment 2', created_at: 4.days.ago)
+      comment3 = Comment.create(user:, post:, text: 'comment 3', created_at: 3.days.ago)
+      comment4 = Comment.create(user:, post:, text: 'comment 4', created_at: 2.days.ago)
+      comment5 = Comment.create(user:, post:, text: 'comment 5', created_at: 1.day.ago)
+      comment6 = Comment.create(user:, post:, text: 'comment 6', created_at: Time.now)
 
       expect(post.five_most_recent_comments).to eq([comment6, comment5, comment4, comment3, comment2])
     end
