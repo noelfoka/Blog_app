@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def index
     @users = User.all
-    @users.each do |x| 
+    @users.each do |x|
       puts "User Name: #{x.name}"
     end
   end
