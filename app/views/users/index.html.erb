@@ -1,22 +1,23 @@
-<div>
-<% if @users.empty? %> 
-  <div class="user_container">There are no users.</div>
-<% else %>
-<div class="blog-container">
-  <% @users.each do |user| %>
-      <div class="user-container">
-        <%= image_tag user.photo, class: "profile-pic", alt: "User Profile Photo" %>
-        <%= link_to user_url(user), class:"user-details-link" do %>
-         <div class="user-details">
-           <h1><%= user.name %></h1>
-           <p class="total-posts">Number of posts: <%= user.posts_counter %></p>
-         </div>
-        <% end %>
+<h1>All user</h1>
+
+<br/>
+<div class="container-sm">
+  <% @users.each do |user|%>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4" style="width: 100px;">
+          <a href = "<%= user_posts_path(user) %>">
+            <img src =<%= user.photo %> class="img-fluid rounded" alt="User Photo">
+          </a>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to user.name, user_path(user) %></h5>
+            <p class="card-text"><small class="text-muted">Number of posts: <%= user.post_counter %></small></p>
+          </div>
+        </div>
       </div>
+    </div>
   <% end %>
 </div>
-<% end %>
-</div>
-
-<div class="footer_space"></div>
 
