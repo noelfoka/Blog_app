@@ -1,1 +1,31 @@
-<h1>Here is the profile of individual user</h1>
+<div class="user-post-container">
+  <div class="user-container">
+        <%= image_tag @user.photo, class: "profile-pic", alt: "User Profile Photo" %>
+         <div class="post-details">
+           <h1><%= @user.name %></h1>
+           <p class="total-posts">Number of posts: <%= @user.posts_counter %></p>
+         </div>
+  </div>
+  <div class="bio-container"
+      <span>Bio</span>
+      <p class="bio"><%= @user.bio %></p>
+  </div>
+
+  <% if @user.recent_posts == [] %> 
+  <div class="post_container">There are no posts by this user.</div>
+<% else %>
+<div class="post_container">
+  <% @user.recent_posts.each_with_index do |post, index| %>
+    <div class="post-card">
+    <div><%= link_to "Post  ##{index + 1}", user_post_path(post.author, post) %></div>
+    <div><%= post.text %></div>
+    <div class="comments_likes">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></div>
+    </div>
+  <% end %>
+</div>
+<% end %>
+<% if @user.recent_posts.empty? == false %>
+<button class="all-post-btn"><%= link_to "See all posts", user_posts_path(@user) %></button>
+<% end %>
+
+</div>      

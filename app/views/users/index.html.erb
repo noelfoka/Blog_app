@@ -1,1 +1,22 @@
-<h1>Here is a list of all users</h1>
+<div>
+<% if @users.empty? %> 
+  <div class="user_container">There are no users.</div>
+<% else %>
+<div class="blog-container">
+  <% @users.each do |user| %>
+      <div class="user-container">
+        <%= image_tag user.photo, class: "profile-pic", alt: "User Profile Photo" %>
+        <%= link_to user_url(user), class:"user-details-link" do %>
+         <div class="user-details">
+           <h1><%= user.name %></h1>
+           <p class="total-posts">Number of posts: <%= user.posts_counter %></p>
+         </div>
+        <% end %>
+      </div>
+  <% end %>
+</div>
+<% end %>
+</div>
+
+<div class="footer_space"></div>
+

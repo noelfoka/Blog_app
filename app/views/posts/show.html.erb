@@ -1,1 +1,18 @@
-<h1>Post Details</h1>
+<div class="post-and-comments">
+<div class="full-post">
+   <div class="name-comment">
+     <%= link_to "Post ##{1} by #{@post.author.name}", user_post_path(@post.author, @post) %>
+     <span>Comments: <%= @post.comments_counter %>, Likes: <%= @post.likes_counter %></span>
+   </div>
+   <div><%= @post.text %></div>
+</div>
+
+    <% if @post.comments == [] %> 
+      <p>There are no comments for this post.</p>
+    <% else %>
+        <% @post.comments.each do |comment| %>
+          <ul class="comment-container">
+           <li><%= @post.author.name %>: <%= comment.text %></li>
+          </ul>
+        <% end %>
+    <% end %>
