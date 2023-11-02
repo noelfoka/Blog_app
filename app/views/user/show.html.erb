@@ -11,21 +11,23 @@
       <p class="bio"><%= @user.bio %></p>
   </div>
 
-  <% if @user.three_most_recent_posts == [] %> 
+  <% if @user.three_most_recent_posts.empty? %>
   <div class="post_container">There are no posts by this user.</div>
 <% else %>
-<div class="post_container">
-  <% @user.three_most_recent_posts.empty.each_with_index do |post, index| %>
-    <div class="post-card">
-    <div><%= link_to "Post  ##{index + 1}", user_post_path(post.author, post) %></div>
-    <div><%= post.text %></div>
-    <div class="comments_likes">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></div>
-    </div>
-  <% end %>
-</div>
+  <div class="post_container">
+    <% @user.three_most_recent_posts.each_with_index do |post, index| %>
+      <div class="post-card">
+        <div><%= link_to "Post  ##{index + 1}", user_post_path(post.author, post) %></div>
+        <div><%= post.text %></div>
+        <div class="comments_likes">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
+
 <% if @user.three_most_recent_posts.empty? == false %>
-<button class="all-post-btn"><%= link_to "See all posts", user_posts_path(@user) %></button>
+  <button class="all-post-btn"><%= link_to "See all posts", user_posts_path(@user) %></button>
 <% end %>
+
 
 </div>    
