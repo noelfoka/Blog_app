@@ -1,12 +1,9 @@
 class PostsController < ApplicationController
   def index
-    @user = user.find(params[:user_id])
-    @posts = @user.posts
+    @posts = Post.where(author_id: params[:user_id])
   end
 
   def show
-    @posts = Post.all
-    @post = Post.find params[:id]
-    @post_id = @posts.index(@post) + 1
+    @post = Post.find(params[:id])
   end
 end
