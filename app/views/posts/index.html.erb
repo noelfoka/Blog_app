@@ -21,10 +21,10 @@
   </div>
 
 
-   <% if post.recent_5_comments == [] %> 
+   <% if post.five_most_recent_comments == [] %> 
      <p>There are no comments for this post.</p>
    <% else %>
-     <% post.recent_5_comments.each do |comment| %>
+     <% post.five_most_recent_comments.each do |comment| %>
        <ul class="comment-container">
          <li><%= post.author.name %>: <%= comment.text %></li>
        </ul>
