@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'comments/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resources :user, only: [:index, :show] do
+  resources :users, only: [:index, :show] do
     resources :posts, only: [:index, :show, :new, :create]do
     resources :comments ,only:[:index,:new,:create]
     resources :likes ,only:[:create]
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   # resources :posts, only: [:show]
-  root 'user#index'
+  root 'users#index'
   # Defines the root path route ("/")
   # root "articles#index"
 end

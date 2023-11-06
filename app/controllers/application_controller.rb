@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     user_id = params[:user_id]
-    @current_user = User.find_by_id(user_id)
+    @current_user = User.find_by(id: user_id)
   end
 
   def require_user

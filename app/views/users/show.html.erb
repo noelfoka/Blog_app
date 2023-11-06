@@ -1,0 +1,54 @@
+<br/>
+<div class="container-sm">
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4" style="width: 100px;">
+        <img src ='<%= @user.photo %>' class="img-fluid rounded" alt="User Photo">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= @user.name %></h5>
+          <p class="card-text"><small class="text-muted">Number of posts: <%= @user.post_counter %></small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card border-success mb-3">
+    <div class="card-body text-success text-bg-light p-3">
+      <h5 class="card-title">Bio</h5>
+      <p class="card-text"><%= @user.bio%></p>
+      <a href='<%=new_user_post_path(@user.id, @post)%>'>
+        <button type="button" class="btn btn-outline-primary">Create New Post</button>
+      </a>
+    </div>
+  </div>
+  <% @recent_posts.each do |post|%>
+    <div class="card border-success mb-3">
+      <div class="card-body text-success">
+        <a href = <%= user_post_path(post.author.id, post.id) %>>
+          <h5 class="card-title">Post #<%= @recent_posts.index(post) + 1%></h5>
+        </a>
+        <h5>Post Title: <%= post.title %> </h5>
+        <p class="card-text"><%= post.text %></p>
+        <div class= "d-flex card-text">
+          <a href='<%= new_user_post_comment_path(user_id: post.author_id, post_id: post.id)%>'>
+            <span class="btn btn-light">Comments:</span>
+          </a>
+          <button class= "btn btn-light" disabled>
+            <%= post.comments_counter%></button>
+          <%= form_for(post.likes.new, url: user_post_likes_path(post.author, post)) do |f| %>
+            <%= f.hidden_field :author_id, value: @current_user %>
+            <%= f.submit "Like:", class: "btn btn-light" %>
+          <% end %>
+          <button class= "btn btn-light" disabled><%= post.likes_counter%></button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <a href = '<%= user_posts_path(@user) %>'>
+      <button type="button" class="btn btn-outline-primary">See All Posts</button>
+    </div>
+  </div>
+  <br/>
+</div>
