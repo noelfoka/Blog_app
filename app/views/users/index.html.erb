@@ -1,0 +1,20 @@
+<br/>
+<div class="container-sm">
+  <% @users.each do |user|%>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4" style="width: 100px;">
+          <a href = "<%= user_posts_path(user.id) %>">
+            <img src =<%= user.photo %> class="img-fluid rounded" alt="User Photo">
+          </a>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to user.name, user_path(user.id) %></h5>
+            <p class="card-text"><small class="text-muted">Number of posts: <%= user.posts.count %></small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -31,9 +31,9 @@ RSpec.describe User, type: :model do
       post2 = Post.create(title: 'post2', author: user, created_at: 3.day.ago)
       post3 = Post.create(title: 'post3', author: user, created_at: 2.day.ago)
 
-      reecent_posts = user.three_most_recent_posts
+      recent_posts = user.three_most_recent_posts
 
-      expect(reecent_posts).to eq([post3, post2, post1])
+      expect(recent_posts).to eq([post3, post2, post1])
     end
   end
 end

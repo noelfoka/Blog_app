@@ -1,32 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Like, type: :model do
-  before :all do
-    @user = User.create(name: 'Lily')
-    @post = Post.create(author: @user, title: 'Title')
-  end
+RSpec.describe Comment, type: :model do
+  describe '#update_post_comments_counter' do
+    it 'updates the post comments_counter attribute' do
+      user = User.create(name: 'Tom')
+      post = Post.create(title: 'Hello', author: user)
+      comment = Comment.create(author: user, post:)
 
-  context '#create' do
-    it 'is valid with the existing user and the post' do
-      expect(Like.new(user: @user, post: @post)).to be_valid
-    end
+      comment.update_post_comments_counter
 
-    it 'is not valid without the post' do
-      expect(Like.new(user: @user)).to_not be_valid
-    end
-
-    it 'is not valid without the user' do
-      expect(Like.new(post: @post)).to_not be_valid
-    end
-  end
-
-  context '#update_post_likes_counter' do
-    before :all do
-      8.times { Like.create(user: @user, post: @post) }
-    end
-
-    it 'keeps track of likes and equals to 8' do
-      expect(@post.likes_counter).to eq 8
+      expect(post.reload.comments_counter).to eq(1)
     end
   end
 end
