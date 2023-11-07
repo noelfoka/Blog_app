@@ -2,29 +2,29 @@ require 'rails_helper'
 
 RSpec.feature 'User Index', type: :feature do
   scenario 'visiting the user index page' do
-    User.create(name: 'Noel', photo: 'https://unsplash.com/photos/F_-0BxGuVvo')
-    User.create(name: 'Joel', photo: 'https://unsplash.com/photos/F_-0BxGuVvo')
+    User.create(name: 'Tom', photo: 'https://www.kasandbox.org/programming-images/avatars/leaf-blue.png')
+    User.create(name: 'Ali', photo: 'https://www.kasandbox.org/programming-images/avatars/leaf-blue.png')
 
     visit users_path
 
-    expect(page).to have_content('Noel')
-    expect(page).to have_content('Joel')
+    expect(page).to have_content('Tom')
+    expect(page).to have_content('Ali')
 
     # To check that images with specific src URLs are present
-    expect(page).to have_selector('img[src="https://unsplash.com/photos/F_-0BxGuVvo"]',
+    expect(page).to have_selector('img[src="https://www.kasandbox.org/programming-images/avatars/leaf-blue.png"]',
                                   count: 2)
   end
 
   scenario 'visiting the user index page, you see the number of posts each user has written..' do
-    user1 = User.create(name: 'Noel')
-    User.create(name: 'Joel')
+    user1 = User.create(name: 'Tom')
+    User.create(name: 'Ali')
     Post.create(author: user1, title: 'first post')
     Post.create(author: user1, title: 'second post')
     Post.create(author: user1, title: 'third post')
 
     visit users_path
 
-    expect(page).to have_content('0')
+    expect(page).to have_content('3')
     expect(page).to have_content('0')
   end
 
