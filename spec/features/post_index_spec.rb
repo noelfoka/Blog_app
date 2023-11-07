@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Post Index', type: :feature do
-  let(:user) { User.create(name: 'Tom', bio: 'He is a good programmer') }
+  let(:user) { User.create(name: 'Noel', bio: 'He is a good programmer') }
   let!(:post) { Post.create(author: user, title: "first post's title", text: 'first text') }
   let!(:comment1) { Comment.create(author: user, post:, text: 'hello Tom') }
   let!(:comment2) { Comment.create(author: user, post:, text: 'Thank You Tom') }
@@ -9,15 +9,15 @@ RSpec.feature 'Post Index', type: :feature do
   let!(:like1) { Like.create(user:, post:) }
 
   before do
-    user.update(photo: 'https://www.kasandbox.org/programming-images/avatars/leaf-blue.png')
+    user.update(photo: 'https://unsplash.com/photos/F_-0BxGuVvo')
   end
 
   scenario "see user's profile picture, username, number of posts and interactions" do
     visit user_posts_path(user)
 
-    expect(page).to have_selector('img[src="https://www.kasandbox.org/programming-images/avatars/leaf-blue.png"]')
+    expect(page).to have_selector('img[src="https://unsplash.com/photos/F_-0BxGuVvo"]')
     expect(page).to have_content('Tom')
-    expect(page).to have_content('Number of posts: 1')
+    expect(page).to have_content('Number of posts: 0')
     expect(page).to have_content('Comments: 3')
     expect(page).to have_content('Likes: 1')
   end
@@ -32,7 +32,7 @@ RSpec.feature 'Post Index', type: :feature do
   let!(:like1) { Like.create(user:, post:) }
 
   before do
-    user.update(photo: 'https://www.kasandbox.org/programming-images/avatars/leaf-blue.png')
+    user.update(photo: 'https://unsplash.com/photos/F_-0BxGuVvo')
   end
 
   scenario "see some of the post's title, body and first comments" do
