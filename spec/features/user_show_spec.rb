@@ -34,6 +34,12 @@ RSpec.feature 'User Show', type: :feature do
     expect(current_path).to eq(user_post_path(user_id: post2.author_id, id: post2.id))
   end
 
+  scenario 'displays the number of posts the user has written' do
+    visit user_path(user)
+    puts "#{user.post_counter}"
+    expect(page).to have_content("#{user.post_counter}")
+  end  
+
   scenario 'clicking on See All Posts redirects to the user\'s post index page' do
     click_link 'See All Posts'
     expect(page).to have_current_path(user_posts_path(user))
