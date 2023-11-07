@@ -27,12 +27,6 @@ RSpec.feature 'User Index', type: :feature do
     expect(page).to have_content('Post #3')
   end
 
-  scenario 'Redirects to the post show page when a post is clicked' do
-    visit user_path(user)
-    click_link post2.title
-    expect(current_path).to eq(user_post_path(user_id: post2.author_id, id: post2.id))
-  end
-
   scenario 'displays the number of posts the user has written' do
     visit user_path(user)
     expect(page).to have_content(user.post_counter.to_s)
@@ -52,6 +46,12 @@ RSpec.feature 'User Show', type: :feature do
 
   before do
     visit user_path(user)
+  end
+
+  scenario 'Redirects to the post show page when a post is clicked' do
+    visit user_path(user)
+    click_link post2.title
+    expect(current_path).to eq(user_post_path(user_id: post2.author_id, id: post2.id))
   end
 
   scenario 'redirects to the post\'s show page when you click on a user\'s post' do
