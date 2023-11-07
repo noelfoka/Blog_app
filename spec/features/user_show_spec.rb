@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'User Show', type: :feature do
-  let(:user) { User.create(name: 'Tom', photo: 'https://picsum.photos/id/7/200', bio: 'He is a good programmer') }
+  let(:user) { User.create(name: 'Noel', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'He is a good programmer') }
   let!(:post1) { Post.create(author: user, title: 'Post #1', text: 'first text') }
   let!(:post2) { Post.create(author: user, title: 'Post #2', text: 'second text') }
   let!(:post3) { Post.create(author: user, title: 'Post #3', text: 'third text') }
@@ -11,14 +11,14 @@ RSpec.feature 'User Show', type: :feature do
   end
 
   scenario 'visiting the user Show page' do
-    expect(page).to have_content('Tom')
+    expect(page).to have_content('Noel')
     expect(page).to have_content('Bio')
     expect(page).to have_content('He is a good programmer')
     expect(page).to have_link('See All Posts')
   end
 
   scenario 'asserts you can see the user\'s profile picture' do
-    expect(page).to have_selector('img[src="https://picsum.photos/id/7/200"]')
+    expect(page).to have_selector('img[src="https://unsplash.com/photos/F_-0BxGuVvo"]')
   end
 
   scenario 'asserts you can see the user\'s first 3 posts' do
@@ -29,7 +29,7 @@ RSpec.feature 'User Show', type: :feature do
 end
 
 RSpec.feature 'User Show', type: :feature do
-  let(:user) { User.create(name: 'Tom', photo: 'https://picsum.photos/id/7/200', bio: 'He is a good programmer') }
+  let(:user) { User.create(name: 'Noel', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'He is a good programmer') }
   let!(:post1) { Post.create(author: user, title: 'Post #1', text: 'first text') }
   let!(:post2) { Post.create(author: user, title: 'Post #2', text: 'second text') }
   let!(:post3) { Post.create(author: user, title: 'Post #3', text: 'third text') }
