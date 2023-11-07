@@ -37,13 +37,13 @@ RSpec.feature 'Post Index', type: :feature do
 
   scenario "see some of the post's title, body, and first comments" do
     visit user_posts_path(user)
-  
+
     expect(page).to have_selector('img[src="https://unsplash.com/photos/F_-0BxGuVvo"]')
     expect(page).to have_content('Tom')
     expect(page).to have_content('Number of posts: 0')
     expect(page).to have_content('Comments: 3')
     expect(page).to have_content('Likes: 1')
-    expect(page).to have_content("first text")
+    expect(page).to have_content('first text')
   end
 
   scenario 'see a section for pagination if there are more posts than fit on the view' do
