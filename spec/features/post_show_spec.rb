@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Post Show', type: :feature do
   let(:user) do
-    User.create(name: 'Tom', photo: 'https://www.kasandbox.org/programming-images/avatars/leaf-blue.png',
+    User.create(name: 'Noel', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
                 bio: 'He is a good programmer')
   end
   let!(:post) { Post.create(author: user, title: "first post's title", text: 'first text') }
@@ -16,7 +16,7 @@ RSpec.feature 'Post Show', type: :feature do
 
   scenario 'see the post details' do
     expect(page).to have_content("first post's title")
-    expect(page).to have_content('by Tom')
+    expect(page).to have_content('by Noel')
     expect(page).to have_content('Comments: 2')
     expect(page).to have_content('Likes: 1')
   end
@@ -24,7 +24,7 @@ end
 
 RSpec.feature 'Post Show', type: :feature do
   let(:user) do
-    User.create(name: 'Tom', photo: 'https://www.kasandbox.org/programming-images/avatars/leaf-blue.png',
+    User.create(name: 'Noel', photo: 'https://unsplash.com/photos/F_-0BxGuVvo',
                 bio: 'He is a good programmer')
   end
   let!(:post) { Post.create(author: user, title: "first post's title", text: 'first text') }
@@ -51,7 +51,7 @@ RSpec.feature 'Post Show', type: :feature do
 
     visit user_post_path(user, post)
 
-    expect(page).to have_content('Tom')
+    expect(page).to have_content('Noel')
     expect(page).to have_content('Alice')
   end
 end
