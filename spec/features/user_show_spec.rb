@@ -32,7 +32,7 @@ RSpec.feature 'User Show', type: :feature do
 
     click_link post2.title
     expect(current_path).to eq(user_post_path(user_id: post2.author_id, id: post2.id))
-  end 
+  end
 
   scenario 'clicking on See All Posts redirects to the user\'s post index page' do
     click_link 'See All Posts'
