@@ -6,12 +6,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">User Profile  |</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
+        <% if user_signed_in? %>
+          <!-- User is logged in, show "Logout" and "Edit Password" links -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" data-method="delete" href="<%= destroy_user_session_path %>">Logout</a>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Edit Password", edit_user_registration_path, class: "nav-link active" %>
+          </li>
+        <% else %>
+          <!-- User is not logged in, show "Sign Up" and "Sign In" links -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<%= new_user_registration_path %>">Sign Up |</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="<%= user_session_path %>">Sign In |</a>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
