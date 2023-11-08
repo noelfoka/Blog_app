@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @comments = Comment.all
     @user = User.find(params[:user_id])
@@ -6,12 +7,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    set_current_user
-    @user = @current_user
-    @posts = @user.posts.order(created_at: :desc)
-    post_id = params[:id]
-    @post = @posts.find(post_id)
-    @post_id = @posts.find_index(@post) + 1
+    @posts = Post.all
+    @post = Post.find params[:id]
+    @post_id = @posts.index(@post) + 1
   end
 
   def new
@@ -20,7 +18,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    set_current_user
+    @current_user = User.find(params[:user_id])
     @post = @current_user.posts.build(post_params)
     @post.comments_counter = 0
     @post.likes_counter = 0
