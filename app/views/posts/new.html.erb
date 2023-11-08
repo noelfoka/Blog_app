@@ -1,4 +1,4 @@
-<%= form_for :post, url: user_posts_path(@user) do |f| %>
+<%= form_for :post, url: user_posts_path(@user.id, @post) do |f| %>
   Post Title: <%= f.text_field :title %><br />
   Post Details: <%= f.text_area :text %><br />
   <%= f.submit %>
