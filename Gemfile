@@ -71,3 +71,5 @@ group :test do
   gem 'rails-controller-testing'
   gem 'webdrivers'
 end
+
+gem "devise", "~> 4.9"
