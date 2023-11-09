@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   get 'comments/new'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resources :users, only: [:index, :show] do
-    resources :posts, only: [:index, :show, :new, :create]do
-    resources :comments ,only:[:index,:new,:create]
-    resources :likes ,only:[:create]
+  resources :users, only: %i[index show] do
+    resources :posts, only: %i[index show new create destroy] do
+      resources :comments, only: %i[index new create destroy]
+      resources :likes, only: [:create]
     end
   end
 
