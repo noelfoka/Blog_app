@@ -32,7 +32,7 @@ class PostsController < ApplicationController
       render :new
     end
   end
-  
+
   def destroy
     @user = User.find(params[:user_id])
     post = Post.find(params[:id])
