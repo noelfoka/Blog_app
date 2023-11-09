@@ -11,7 +11,7 @@
           <span class="card-text">Likes: <%= @post.likes_counter%></span>
         </div>
       </div>
-      <h5>Post Title: <%= @post.title %></h5>
+      <h5>Post Title: <%= @post.title %> </h5>
       <p class="card-text"><%= @post.text %></p>
       <% if @post.author.id == current_user.id || current_user.admin? %>
         <%= button_to 'Delete Post', user_post_path(@post.author, @post), method: :delete, class: 'btn btn-danger' %>
@@ -20,18 +20,15 @@
         <hr>
         <div>
           <% @post.comments.each do |comment|%>
-            <div class="d-flex justfy-content">
-              <p class = "m-0 d-flex"><strong><%= comment.user.name%></strong>: 
-                <%= comment.text%>
-              </p>
-              <% if can? :destroy, comment %>
-                <%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete, class: 'btn btn-light text-danger btn-sm'%>
-              <% end %>
-            </div>
+            <p class = "m-0"><strong><%= comment.author.name%></strong>: 
+              <%= comment.text%>
+            </p>
+            <% if can? :destroy, comment %>
+              <%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete, class: 'btn btn-light text-danger btn-sm'%>
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
-
