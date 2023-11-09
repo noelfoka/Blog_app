@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  load_and_authorize_resource
   before_action :authenticate_user!
   def new
     @post = Post.find(params[:post_id])
