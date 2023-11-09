@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
   def index
     @comments = Comment.all
@@ -7,27 +8,37 @@ class PostsController < ApplicationController
   end
 
   def show
-    @posts = Post.all
+    @post = Post.new
     @post = Post.find params[:id]
+    @posts = Post.all
+    @user = current_user
     @post_id = @posts.index(@post) + 1
   end
 
   def new
     @user = User.find(params[:user_id])
-    @post = Post.new
+    @post = @user.posts.build
   end
 
   def create
-    @current_user = User.find(params[:user_id])
-    @post = @current_user.posts.build(post_params)
-    @post.comments_counter = 0
-    @post.likes_counter = 0
+    @user = User.find(params[:user_id])
+    @post = @user.posts.build(post_params)
 
     if @post.save
-      redirect_to user_post_path(@current_user.id, @post.id), notice: 'Post was successfully Created'
+      flash[:notice] = 'Post successfully created.'
+      redirect_to user_post_path(@user, @post)
     else
+      flash[:alert] = 'Error creating the post.'
       render :new
     end
+  end
+
+  def destroy
+    @user = current_user
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:notice] = 'Post successfully deleted.'
+    redirect_to user_posts_path
   end
 
   private
