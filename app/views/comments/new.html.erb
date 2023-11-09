@@ -1,7 +1,10 @@
-<div>
-  <%= form_with(model: [@post, Comment.new], url: user_post_comments_path(@post.author, @post), local: true, html: { class: "form" }) do |form| %>
-    <div>
-      Comments Box: <%= form.text_area :text %>
+<br/>
+<br/>
+<div class="container-fluid">
+  <%= form_with(model: [@post, Comment.new], url: user_post_comments_path(current_user.id, @post), local: true, html: { class: "form container-fluid" }) do |form| %>
+    <div class="container-fluid d-inline">
+      <div>Comments Box:</div>
+      <%= form.text_area :text %>
     </div>
     <div>
       <%= form.submit 'Create Comment' %>

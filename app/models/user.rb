@@ -11,6 +11,7 @@ class User < ApplicationRecord
   attribute :bio, :text
   attribute :post_counter, :integer, default: 0
   attribute :photo, :string
+  enum role: %i[user admin]
 
   validates :name, presence: true
   validates :post_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
