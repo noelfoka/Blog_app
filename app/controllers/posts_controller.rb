@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  load_and_authorize_resource
   before_action :authenticate_user!
   def index
     @comments = Comment.all
@@ -9,8 +8,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.new
-    @post = Post.find params[:id]
     @posts = Post.all
+    @post = Post.find params[:id]
     @user = current_user
     @post_id = @posts.index(@post) + 1
   end
@@ -21,24 +20,33 @@ class PostsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @post = @user.posts.build(post_params)
+    @current_user = User.find(params[:user_id])
+    @post = @current_user.posts.build(post_params)
+    @post.comments_counter = 0
+    @post.likes_counter = 0
 
     if @post.save
-      flash[:notice] = 'Post successfully created.'
-      redirect_to user_post_path(@user, @post)
+      redirect_to user_post_path(@current_user.id, @post.id), notice: 'Post was successfully Created'
     else
-      flash[:alert] = 'Error creating the post.'
+      flash[:alert] = 'Error creating the post'
       render :new
     end
   end
 
   def destroy
-    @user = current_user
-    @post = Post.find(params[:id])
-    @post.destroy
-    flash[:notice] = 'Post successfully deleted.'
-    redirect_to user_posts_path
+    @user = User.find(params[:user_id])
+    post = Post.find(params[:id])
+    authorize! :destroy, post
+
+    post.comments.destroy_all
+    post.likes.destroy_all
+    if post.destroy
+      flash[:success] = 'Post deleted successfully'
+      redirect_to user_posts_path(@user)
+    else
+      flash.now[:error] = 'Error: Post could not be deleted'
+      redirect_to user_post_path(@user, post)
+    end
   end
 
   private

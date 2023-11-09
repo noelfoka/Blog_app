@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.new(comment_params.merge(user: @user))
+    @comment = @post.comments.new(comment_params.merge(author: @user))
 
     if @comment.save
       redirect_to user_post_path(@user, @post), notice: 'Comment was successfully created.'
@@ -18,17 +18,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  # destroy the comment
   def destroy
-    @user = current_user
     @comment = Comment.find(params[:id])
-
-    if @comment.user == @user
-      @comment.destroy
-      flash[:notice] = 'Comment successfully deleted.'
-    else
-      flash[:alert] = 'You are not authorized to delete this comment.'
-    end
-    redirect_to user_post_path
+    @post = @comment.post
+    @post.decrement!(:comments_counter)
+    @comment.destroy
+    redirect_to user_post_path(author_id: @post.author_id, id: @post.id), notice: 'Comment successfully deleted'
   end
 
   private
