@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   root 'users#index'
   # Defines the root path route ("/")
   # root "articles#index"
-=begin
   namespace :api do
     namespace :v1 do
       resources :users do
