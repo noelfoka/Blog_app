@@ -23,7 +23,7 @@
             <p class = "m-0"><strong><%= comment.author.name%></strong>: 
               <%= comment.text%>
             </p>
-            <% if can? :destroy, comment %>
+            <% if @post.author.id == current_user.id || current_user.admin? %>
               <%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete, class: 'btn btn-light text-danger btn-sm'%>
             <% end %>
           <% end %>
